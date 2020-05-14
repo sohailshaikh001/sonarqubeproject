@@ -1,27 +1,45 @@
 pipeline {
-    agent {
-		label ''
+    agent{
+      node{
+          label 'mypc'
+        }    
+    }
+	
+    parameters {      
+	choice(name: 'CHOICE', choices: ['Dev','Qa', 'Master'], description: 'Select branch')
+       
     }
     stages {
-        stage('Build') {
+       
+        stage('Checkout') {
+		
             steps {
-                sh 'mvn -B -DskipTests clean package'
+                
+             checkout([$class: 'GitSCM', branches: [[name:"${CHOICE}"  ]], 
+             doGenerateSubmoduleConfigurations: false, 
+             extensions: [], submoduleCfg: [], userRemoteConfigs:
+             [[credentialsId: '5dc47f1f-542f-42d2-b5a6-1d2ec6cdcf5e', url: 'https://github.com/sohailshaikh001/Mavenwarproject.git']]])
+    
             }
         }
-        stage('Test') {
-            steps {
-                sh 'mvn test'
-            }
-            post {
-                always {
-                    junit 'target/surefire-reports/*.xml'
-                }
-            }
+        
+        stage('build'){
+		tools {
+        	maven 'Maven_home' 
+  			  }
+        steps{
+          
+            bat "mvn clean install package"
+           
+           }
         }
-        stage('Deliver') {
-            steps {
-                sh './jenkins/scripts/deliver.sh'
-            }
-        }
+	    
+	    stage('sonarqube'){
+		withSonarQubeEnv('MySonarQubeServer'){
+			sh "mvn sonar:sonar"
+	    }
+        
+        
+        
     }
 }
