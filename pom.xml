@@ -1,10 +1,10 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>my.sonarqubeproject</groupId>
-  <artifactId>sonarqubeproject</artifactId>
+  <groupId>my.simplejavaprojectwithsonarqube</groupId>
+  <artifactId>SimpleJavaProjectWithSonarQube</artifactId>
   <version>0.0.1-SNAPSHOT</version>
-  <name>sonarqubeproject</name>
+  <name>SimpleJavaProjectWithSonarQube</name>
   	<properties>
 		<jacoco.version>0.8.2</jacoco.version>
 		<junit.version>4.12</junit.version>
@@ -67,4 +67,4 @@
 			</plugin>			
 		</plugins>
   </build>
-</project>
+</project> 
