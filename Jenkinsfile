@@ -1,9 +1,5 @@
 pipeline {
-    agent{
-      node{
-          label 'mypc'
-        }    
-    }
+    agent any
 	
     parameters {      
 	choice(name: 'CHOICE', choices: ['Dev','Qa', 'Master'], description: 'Select branch')
